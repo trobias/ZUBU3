@@ -11,7 +11,7 @@ const heroPrimaryFont = Montserrat({
 
 export function Hero() {
   return (
-    <section className="section-interactive relative overflow-hidden bg-[#f5f7fb] pb-20 pt-4 sm:pt-6 lg:pt-8">
+    <section id="inicio" className="section-interactive relative overflow-hidden bg-[#f5f7fb] pb-20 pt-4 sm:pt-6 lg:pt-8">
       <div className="absolute inset-0 -z-10">
         <div className="absolute -left-24 top-0 h-80 w-80 animate-hero-float rounded-full bg-[#a7d7ff]/35 blur-3xl" />
         <div className="absolute -right-24 top-8 h-96 w-96 animate-hero-float-reverse rounded-full bg-[#ffd6b3]/35 blur-3xl" />

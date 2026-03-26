@@ -1,18 +1,47 @@
 "use client"
 
-import { useState } from "react"
+import { useState, type MouseEvent } from "react"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 
 const navLinks = [
+  { href: "#inicio", label: "Inicio" },
   { href: "#servicios", label: "Servicios" },
   { href: "#nosotros", label: "Nosotros" },
   { href: "#para-quien", label: "Para Quién" },
+  { href: "#problemas", label: "Problemas" },
+  { href: "#diferencial", label: "Diferencial" },
+  { href: "#beneficios", label: "Beneficios" },
   { href: "#testimonios", label: "Testimonios" },
+  { href: "#contacto", label: "Contacto" },
 ]
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  const scrollToSection = (href: string) => {
+    if (typeof window === "undefined") return
+    const id = href.replace("#", "")
+    const target = document.getElementById(id)
+    if (!target) return
+
+    const headerOffset = 84
+    const targetTop = target.getBoundingClientRect().top + window.scrollY - headerOffset
+
+    window.history.replaceState(null, "", href)
+    window.scrollTo({
+      top: targetTop,
+      behavior: "smooth",
+    })
+  }
+
+  const handleNavClick = (event: MouseEvent<HTMLAnchorElement>, href: string, closeMobile = false) => {
+    event.preventDefault()
+    scrollToSection(href)
+    if (closeMobile) {
+      setMobileMenuOpen(false)
+    }
+  }
 
   return (
     <>
@@ -24,27 +53,28 @@ export function Header() {
           </a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden items-center gap-8 md:flex md:-translate-x-8">
+          <nav className="hidden items-center gap-5 lg:flex lg:-translate-x-6">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                className="text-xs font-medium tracking-wide text-muted-foreground transition-colors hover:text-foreground"
+                onClick={(event) => handleNavClick(event, link.href)}
               >
                 {link.label}
               </a>
             ))}
           </nav>
 
-          <div className="hidden items-center md:flex md:justify-self-end">
+          <div className="hidden items-center lg:flex lg:justify-self-end">
             <Button asChild size="sm" className="btn-energized bg-black text-white hover:bg-black/85">
-              <a href="#contacto">Contactanos</a>
+              <a href="#contacto" onClick={(event) => handleNavClick(event, "#contacto")}>Contactanos</a>
             </Button>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="ml-auto inline-flex items-center justify-center rounded-md p-2 text-muted-foreground md:hidden"
+            className="ml-auto inline-flex items-center justify-center rounded-md p-2 text-muted-foreground lg:hidden"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
           >
@@ -54,21 +84,21 @@ export function Header() {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="border-t border-border/40 bg-background md:hidden">
+          <div className="border-t border-border/40 bg-background lg:hidden">
             <nav className="flex flex-col gap-1 px-4 py-4">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
                   className="rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={(event) => handleNavClick(event, link.href, true)}
                 >
                   {link.label}
                 </a>
               ))}
               <div className="mt-4 space-y-2">
                 <Button asChild className="btn-energized w-full bg-black text-white hover:bg-black/85">
-                  <a href="#contacto" onClick={() => setMobileMenuOpen(false)}>
+                  <a href="#contacto" onClick={(event) => handleNavClick(event, "#contacto", true)}>
                     Contactanos
                   </a>
                 </Button>

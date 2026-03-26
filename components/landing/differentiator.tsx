@@ -2,7 +2,7 @@ import { Layers, ArrowRight } from "lucide-react"
 
 export function Differentiator() {
   return (
-    <section className="section-interactive bg-background py-20 sm:py-28">
+    <section id="diferencial" className="section-interactive bg-background py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="hover-lift-soft relative overflow-hidden rounded-3xl bg-foreground px-6 py-16 sm:px-12 sm:py-20 lg:px-16">
           <div className="absolute inset-0 -z-10">

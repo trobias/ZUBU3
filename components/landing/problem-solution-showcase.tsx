@@ -101,7 +101,7 @@ export function ProblemSolutionShowcase() {
   }
 
   return (
-    <section ref={sectionRef} className="section-interactive relative overflow-hidden bg-background py-20 sm:py-28">
+    <section id="problemas" ref={sectionRef} className="section-interactive relative overflow-hidden bg-background py-20 sm:py-28">
       <div className="absolute inset-0 pointer-events-none">
         <div className="problem-showcase-orb absolute left-[8%] top-10 h-40 w-40 rounded-full bg-black/10 blur-3xl" />
         <div className="problem-showcase-orb absolute right-[10%] bottom-10 h-44 w-44 rounded-full bg-black/10 blur-3xl [animation-delay:0.45s]" />
