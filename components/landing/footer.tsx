@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 const footerLinks = {
   servicios: [
     { label: "Automatización", href: "#servicios" },
@@ -14,15 +16,15 @@ const footerLinks = {
 
 export function Footer() {
   return (
-    <footer className="section-interactive border-t border-border/40 bg-background">
+    <footer className="border-t border-border/40 bg-background">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
         <div className="grid gap-8 lg:grid-cols-4">
           {/* Brand */}
-          <div className="hover-lift-soft rounded-2xl lg:col-span-2">
-            <a href="/" className="flex items-center gap-2">
+          <div className="lg:col-span-2">
+            <Link href="/" className="flex items-center gap-2">
               <span className="text-xl font-bold tracking-tight text-foreground">ZUBU</span>
               <span className="text-sm font-medium text-muted-foreground">Agency</span>
-            </a>
+            </Link>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
               Agencia de automatización, desarrollo de software e inteligencia artificial. Ayudamos a empresas y pymes a transformar procesos manuales en sistemas inteligentes.
             </p>
@@ -31,7 +33,7 @@ export function Footer() {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="motion-icon text-muted-foreground transition-colors hover:text-foreground"
+                className="text-muted-foreground transition-colors hover:text-foreground"
                 aria-label="LinkedIn"
               >
                 <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -42,7 +44,7 @@ export function Footer() {
                 href="https://www.instagram.com/zubudevagency/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="motion-icon motion-icon-delay-1 text-muted-foreground transition-colors hover:text-foreground"
+                className="text-muted-foreground transition-colors hover:text-foreground"
                 aria-label="Instagram"
               >
                 <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -53,7 +55,7 @@ export function Footer() {
           </div>
 
           {/* Links */}
-          <div className="hover-lift-soft rounded-2xl p-2">
+          <div>
             <h3 className="text-sm font-semibold text-foreground">Servicios</h3>
             <ul className="mt-4 space-y-3">
               {footerLinks.servicios.map((link) => (
@@ -69,7 +71,7 @@ export function Footer() {
             </ul>
           </div>
 
-          <div className="hover-lift-soft rounded-2xl p-2">
+          <div>
             <h3 className="text-sm font-semibold text-foreground">Empresa</h3>
             <ul className="mt-4 space-y-3">
               {footerLinks.empresa.map((link) => (

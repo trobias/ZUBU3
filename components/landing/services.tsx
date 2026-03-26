@@ -1,54 +1,72 @@
 import { 
   MessageSquare, 
-  Database, 
-  Link2, 
-  FileText, 
-  Code2, 
-  LayoutDashboard, 
-  BarChart3, 
+  Cog, 
+  Wallet,
+  Users,
   Bot 
 } from "lucide-react"
 
 const services = [
   {
     icon: MessageSquare,
-    title: "Automatización de WhatsApp y atención al cliente",
-    description: "Respuestas automáticas, chatbots y flujos de atención que trabajan las 24 horas.",
+    title: "Atención + Ventas",
+    description: "Automatizamos la comunicación para que no se te escapen clientes ni consultas.",
+    points: [
+      "WhatsApp automatizado (chat + voz)",
+      "Captura de leads sin esfuerzo",
+      "Seguimientos automáticos (mismo día y días posteriores)",
+      "Reactivación de clientes y pedidos de reseñas",
+      "Call center virtual",
+    ],
   },
   {
-    icon: Database,
-    title: "Desarrollo de ERP/CRM",
-    description: "Sistemas de gestión personalizados para controlar clientes, ventas y operaciones.",
+    icon: Cog,
+    title: "Operación",
+    description: "Hacemos que las tareas del día a día se ejecuten solas y en orden.",
+    points: [
+      "Reservas conectadas con calendario",
+      "Stock, pedidos y proveedores sincronizados",
+      "Documentos automáticos",
+      "Archivos y datos centralizados",
+      "Coordinación de reuniones sin fricción",
+    ],
   },
   {
-    icon: Link2,
-    title: "Integraciones con CRM, ERP, formularios y pagos",
-    description: "Conectamos tus herramientas para que los datos fluyan automáticamente.",
+    icon: Wallet,
+    title: "Finanzas",
+    description: "Controlás ingresos y gastos con procesos automáticos, sin depender de planillas sueltas.",
+    points: [
+      "Cobros automáticos",
+      "Conciliaciones más rápidas",
+      "Gastos y presupuestos ordenados",
+      "Proyecciones para decidir mejor",
+      "Facturación express",
+    ],
   },
   {
-    icon: FileText,
-    title: "Automatización de cobros, reservas y documentos",
-    description: "Procesos administrativos que funcionan solos, sin intervención manual.",
-  },
-  {
-    icon: Code2,
-    title: "Desarrollo de software a medida",
-    description: "Aplicaciones y sistemas diseñados específicamente para tu negocio.",
-  },
-  {
-    icon: LayoutDashboard,
-    title: "Sistemas web, paneles de gestión y herramientas internas",
-    description: "Dashboards y herramientas para visualizar y controlar tu operación.",
-  },
-  {
-    icon: BarChart3,
-    title: "Reportes, KPIs y análisis de procesos",
-    description: "Métricas claras para tomar mejores decisiones basadas en datos.",
+    icon: Users,
+    title: "Gestión Interna",
+    description: "Estandarizamos la operación interna para que el equipo trabaje con claridad.",
+    points: [
+      "Tareas y SLA con seguimiento",
+      "Checklists operativos",
+      "Onboarding y offboarding",
+      "Ausencias y reemplazos",
+      "Feedback y performance",
+    ],
   },
   {
     icon: Bot,
-    title: "Agentes de IA y flujos de trabajo automáticos",
-    description: "Inteligencia artificial aplicada a tareas repetitivas y complejas.",
+    title: "Datos + IA",
+    description: "La inteligencia artificial no solo analiza: también ejecuta acciones reales para tu negocio.",
+    points: [
+      "OCR inteligente para leer documentos",
+      "Datos y KPIs automáticos (ETL/ELT)",
+      "Agente analista",
+      "Agente auditor",
+      "Agente QA/marketing",
+      "Alertas automáticas y respaldos cloud",
+    ],
   },
 ]
 
@@ -58,14 +76,14 @@ export function Services() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Nuestros servicios
+            Lo que hacemos por tu negocio
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
-            Soluciones integrales para digitalizar, automatizar y escalar tu negocio
+            Te ayudamos a vender más, ordenar operaciones y ganar tiempo con sistemas simples de usar.
           </p>
         </div>
 
-        <div className="mx-auto mt-16 grid max-w-6xl gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mx-auto mt-16 grid max-w-6xl gap-6 sm:grid-cols-2 xl:grid-cols-3">
           {services.map((service) => (
             <div
               key={service.title}
@@ -78,6 +96,13 @@ export function Services() {
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                 {service.description}
               </p>
+              <ul className="mt-4 space-y-1.5">
+                {service.points.map((point) => (
+                  <li key={point} className="text-sm text-foreground/85">
+                    • {point}
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>

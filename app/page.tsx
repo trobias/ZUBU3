@@ -3,6 +3,7 @@ import { Hero } from "@/components/landing/hero"
 import { About } from "@/components/landing/about"
 import { Services } from "@/components/landing/services"
 import { TargetAudience } from "@/components/landing/target-audience"
+import { ProblemSolutionShowcase } from "@/components/landing/problem-solution-showcase"
 import { Differentiator } from "@/components/landing/differentiator"
 import { Benefits } from "@/components/landing/benefits"
 import { Testimonials } from "@/components/landing/testimonials"
@@ -63,6 +64,7 @@ export default function Home() {
         <About />
         <Services />
         <TargetAudience />
+        <ProblemSolutionShowcase />
         <Differentiator />
         <Benefits />
         <Testimonials />
