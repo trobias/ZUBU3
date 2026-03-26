@@ -83,14 +83,18 @@ function getNodePosition(id: string) {
 
 export function HeroConnectionsGraph() {
   return (
-    <div className="relative mx-auto aspect-[4/3] w-full max-w-[560px] min-h-[320px] rounded-[2.5rem] border border-slate-200/80 bg-white/75 p-4 shadow-[0_18px_45px_rgba(15,23,42,0.1)] backdrop-blur-sm">
-      <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-[#8ed0ff]/10 via-transparent to-[#ffd8b8]/10" />
+    <div className="relative mx-auto aspect-[4/3] w-full max-w-[560px] min-h-[320px] p-4">
+      <div className="absolute inset-0 rounded-[2.7rem] bg-gradient-to-br from-[#a7d7ff]/12 via-transparent to-[#ffd6b3]/14" />
+      <div className="absolute -left-2 top-10 h-32 w-32 animate-zubu-orbit rounded-full bg-[#a7d7ff]/25 blur-3xl" />
+      <div className="absolute -right-4 bottom-10 h-36 w-36 animate-zubu-orbit-reverse rounded-full bg-[#ffd6b3]/25 blur-3xl" />
+      <div className="absolute inset-8 rounded-[2rem] border border-white/40 opacity-70" />
 
       <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
         <defs>
           <linearGradient id="zubu-path-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#6ec5ff" />
-            <stop offset="100%" stopColor="#4f46e5" />
+            <stop offset="0%" stopColor="#74bdf2" />
+            <stop offset="50%" stopColor="#8ea1ff" />
+            <stop offset="100%" stopColor="#f1b68d" />
           </linearGradient>
           <filter id="zubu-signal-glow">
             <feGaussianBlur stdDeviation="0.8" result="blur" />
@@ -115,12 +119,12 @@ export function HeroConnectionsGraph() {
                 d={`M ${from.x} ${from.y} Q ${midX} ${midY} ${to.x} ${to.y}`}
                 fill="none"
                 stroke="url(#zubu-path-gradient)"
-                strokeWidth="0.45"
-                strokeOpacity="0.45"
+                strokeWidth="0.6"
+                strokeOpacity="0.52"
                 className={`animate-zubu-network-path ${connection.delayClass}`}
               />
 
-              <circle r="0.9" fill="#6ec5ff" filter="url(#zubu-signal-glow)">
+              <circle r="1" fill="#7ec9ff" filter="url(#zubu-signal-glow)" className="animate-zubu-signal-soft">
                 <animateMotion dur={`${2.2 + index * 0.25}s`} repeatCount="indefinite" begin={`${index * 0.45}s`}>
                   <mpath href={`#${pathId}`} />
                 </animateMotion>
@@ -139,17 +143,17 @@ export function HeroConnectionsGraph() {
             className={`absolute -translate-x-1/2 -translate-y-1/2 ${node.positionClass} ${node.delayClass} ${node.endpoint ? "animate-hero-float" : "animate-hero-float-delayed"}`}
           >
             <div
-              className={`relative rounded-2xl border border-slate-200 bg-white/90 px-2.5 py-2 text-center shadow-sm sm:px-3 sm:py-2.5 ${
+              className={`relative rounded-2xl border border-white/60 bg-white/65 px-2.5 py-2 text-center shadow-[0_8px_24px_rgba(148,163,184,0.24)] backdrop-blur-md sm:px-3 sm:py-2.5 ${
                 node.endpoint ? "min-w-[82px] sm:min-w-[98px]" : "min-w-[72px] sm:min-w-[88px]"
               }`}
             >
-              <div className="mx-auto mb-1.5 flex h-8 w-8 items-center justify-center rounded-xl bg-slate-100 sm:h-9 sm:w-9">
+              <div className="mx-auto mb-1.5 flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-slate-100 to-white sm:h-9 sm:w-9">
                 <Icon className="h-4 w-4 text-slate-800" />
               </div>
               <span className="block text-[10px] font-semibold text-slate-700 sm:text-xs">{node.label}</span>
               {node.endpoint && (
-                <span className="absolute -right-1 -top-1 flex h-2.5 w-2.5 rounded-full bg-[#6ec5ff]">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#6ec5ff]/75" />
+                <span className="absolute -right-1 -top-1 flex h-2.5 w-2.5 rounded-full bg-[#74bdf2]">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#74bdf2]/75" />
                 </span>
               )}
             </div>
@@ -157,7 +161,7 @@ export function HeroConnectionsGraph() {
         )
       })}
 
-      <div className="absolute bottom-3 left-4 right-4 flex justify-between text-[9px] font-medium uppercase tracking-wide text-slate-400 sm:text-[10px]">
+      <div className="absolute bottom-3 left-4 right-4 flex justify-between text-[9px] font-medium uppercase tracking-wide text-slate-500/80 sm:text-[10px]">
         <span>Flow: ZUBU_001</span>
         <span>Active</span>
       </div>

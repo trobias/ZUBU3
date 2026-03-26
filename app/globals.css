@@ -172,17 +172,49 @@
 
 @keyframes zubu-network-path {
   0% {
-    stroke-dasharray: 120;
-    stroke-dashoffset: 120;
-    opacity: 0.2;
+    stroke-dasharray: 132;
+    stroke-dashoffset: 132;
+    opacity: 0.22;
   }
-  45% {
-    opacity: 0.5;
+  50% {
+    opacity: 0.58;
   }
   100% {
-    stroke-dasharray: 120;
+    stroke-dasharray: 132;
     stroke-dashoffset: 0;
-    opacity: 0.4;
+    opacity: 0.36;
+  }
+}
+
+@keyframes zubu-orbit {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(8px, -10px, 0) scale(1.06);
+  }
+}
+
+@keyframes zubu-orbit-reverse {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-10px, 8px, 0) scale(1.08);
+  }
+}
+
+@keyframes zubu-signal-soft {
+  0%,
+  100% {
+    opacity: 0.75;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
   }
 }
 
@@ -210,5 +242,18 @@
 
   .animate-zubu-network-path {
     animation: zubu-network-path 2.1s ease-in-out infinite;
+  }
+
+  .animate-zubu-orbit {
+    animation: zubu-orbit 7.4s ease-in-out infinite;
+  }
+
+  .animate-zubu-orbit-reverse {
+    animation: zubu-orbit-reverse 8.4s ease-in-out infinite;
+  }
+
+  .animate-zubu-signal-soft {
+    transform-origin: center;
+    animation: zubu-signal-soft 1.8s ease-in-out infinite;
   }
 }
