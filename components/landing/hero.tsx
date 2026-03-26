@@ -37,9 +37,9 @@ export function Hero() {
           </div>
 
           <h1 className="flex flex-col items-center lg:items-start">
-            <span className={`${heroPrimaryFont.className} block text-6xl font-black uppercase tracking-tight sm:text-7xl lg:text-8xl`}>
-              <span className="hero-title-enter hero-title-zu">ZU</span>
-              <span className="hero-title-enter hero-title-bu">BU</span>
+            <span className={`${heroPrimaryFont.className} hero-title-yinyang block text-6xl font-black uppercase tracking-tight sm:text-7xl lg:text-8xl`}>
+              <span className="hero-title-enter hero-title-zu-yy">ZU</span>
+              <span className="hero-title-enter hero-title-bu-yy">BU</span>
             </span>
           </h1>
 
