@@ -1,5 +1,12 @@
+"use client"
+
 import { CheckCircle2 } from "lucide-react"
 import Image from "next/image"
+import { useRef } from "react"
+import gsap from "gsap"
+import { useGSAP } from "@gsap/react"
+
+gsap.registerPlugin(useGSAP)
 
 const highlights = [
   "Sistemas claros y medibles",
@@ -35,9 +42,67 @@ const teamMembers = [
   },
 ]
 
+const stats = [
+  { value: 10, prefix: "+", suffix: "", label: "Proyectos entregados" },
+  { value: 100, prefix: "", suffix: "%", label: "Clientes satisfechos" },
+  { value: 24, prefix: "", suffix: "/7", label: "Sistemas funcionando" },
+  { value: 70, prefix: "-", suffix: "%", label: "Tiempo en tareas manuales" },
+]
+
 export function About() {
+  const sectionRef = useRef<HTMLElement | null>(null)
+  const counterRefs = useRef<Array<HTMLSpanElement | null>>([])
+  const hasAnimated = useRef(false)
+
+  useGSAP(
+    () => {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (!entry.isIntersecting || hasAnimated.current) {
+            return
+          }
+
+          hasAnimated.current = true
+
+          counterRefs.current.forEach((element, index) => {
+            if (!element) {
+              return
+            }
+
+            const item = stats[index]
+            const proxy = { value: 0 }
+
+            gsap.to(proxy, {
+              value: item.value,
+              duration: 1.6,
+              ease: "power3.out",
+              delay: index * 0.08,
+              onUpdate: () => {
+                const currentValue = Math.round(proxy.value)
+                element.textContent = `${item.prefix}${currentValue}${item.suffix}`
+              },
+            })
+          })
+        },
+        {
+          threshold: 0.12,
+          rootMargin: "0px 0px -12% 0px",
+        }
+      )
+
+      if (sectionRef.current) {
+        observer.observe(sectionRef.current)
+      }
+
+      return () => {
+        observer.disconnect()
+      }
+    },
+    { scope: sectionRef }
+  )
+
   return (
-    <section id="nosotros" className="section-interactive bg-muted/30 py-20 sm:py-28">
+    <section ref={sectionRef} id="nosotros" className="section-interactive bg-muted/30 py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
@@ -63,26 +128,23 @@ export function About() {
             <div className="relative">
               <div className="absolute -inset-4 rounded-3xl bg-gradient-to-tr from-border/50 to-transparent" />
               <div className="relative grid grid-cols-2 gap-4">
-                <div className="space-y-4">
-                  <div className="hover-lift-card rounded-2xl border border-border/60 bg-card p-5 shadow-sm sm:p-6">
-                    <div className="text-2xl font-bold text-foreground sm:text-3xl">+10</div>
-                    <div className="mt-1 text-sm text-muted-foreground">Proyectos entregados</div>
+                {stats.map((item, index) => (
+                  <div
+                    key={item.label}
+                    className={`hover-lift-card rounded-2xl border border-border/60 bg-card p-5 shadow-sm sm:p-6 ${index % 2 === 1 ? "mt-8" : ""}`}
+                  >
+                    <div className="text-2xl font-bold text-foreground sm:text-3xl">
+                      <span
+                        ref={(element) => {
+                          counterRefs.current[index] = element
+                        }}
+                      >
+                        {`${item.prefix}0${item.suffix}`}
+                      </span>
+                    </div>
+                    <div className="mt-1 text-sm text-muted-foreground">{item.label}</div>
                   </div>
-                  <div className="hover-lift-card rounded-2xl border border-border/60 bg-card p-5 shadow-sm sm:p-6">
-                    <div className="text-2xl font-bold text-foreground sm:text-3xl">100%</div>
-                    <div className="mt-1 text-sm text-muted-foreground">Clientes satisfechos</div>
-                  </div>
-                </div>
-                <div className="mt-8 space-y-4">
-                  <div className="hover-lift-card rounded-2xl border border-border/60 bg-card p-5 shadow-sm sm:p-6">
-                    <div className="text-2xl font-bold text-foreground sm:text-3xl">24/7</div>
-                    <div className="mt-1 text-sm text-muted-foreground">Sistemas funcionando</div>
-                  </div>
-                  <div className="hover-lift-card rounded-2xl border border-border/60 bg-card p-5 shadow-sm sm:p-6">
-                    <div className="text-2xl font-bold text-foreground sm:text-3xl">-70%</div>
-                    <div className="mt-1 text-sm text-muted-foreground">Tiempo en tareas manuales</div>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>

@@ -185,7 +185,7 @@ export function HeroConnectionsGraph() {
       id: 1,
       routeId: "upper",
       distance: 0,
-      speed: 24,
+      speed: 16,
       spawnedAtRouting: false,
       invertColor: false,
     },
@@ -193,7 +193,7 @@ export function HeroConnectionsGraph() {
       id: 2,
       routeId: "lower",
       distance: 0,
-      speed: 25,
+      speed: 17,
       spawnedAtRouting: false,
       invertColor: true,
     },
@@ -201,7 +201,7 @@ export function HeroConnectionsGraph() {
 
   useEffect(() => {
     let animationFrameId = 0
-    const frameInterval = 1 / 50
+    const frameInterval = 1 / 60
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
     if (reduceMotion) {
@@ -221,7 +221,7 @@ export function HeroConnectionsGraph() {
         return
       }
 
-      const deltaSeconds = Math.min((timestamp - lastFrameTime.current) / 1000, 0.06)
+      const deltaSeconds = Math.min((timestamp - lastFrameTime.current) / 1000, 0.033)
       lastFrameTime.current = timestamp
       accumulatedDelta.current += deltaSeconds
 
@@ -254,7 +254,7 @@ export function HeroConnectionsGraph() {
             previousDistance < route.routingDistance &&
             nextDistance >= route.routingDistance
 
-          if (crossesRoutingNode && previousParticles.length + newParticles.length < 6) {
+          if (crossesRoutingNode && previousParticles.length + newParticles.length < 4) {
             const alternateRouteId: RouteId = particle.routeId === "upper" ? "lower" : "upper"
             const alternateRoute = routeGeometries[alternateRouteId]
 
@@ -262,7 +262,7 @@ export function HeroConnectionsGraph() {
               id: nextParticleId.current,
               routeId: alternateRouteId,
               distance: alternateRoute.routingDistance,
-              speed: Math.max(20, particle.speed - 1),
+              speed: Math.max(14, particle.speed - 1),
               spawnedAtRouting: true,
               invertColor: !particle.invertColor,
             })
@@ -305,10 +305,10 @@ export function HeroConnectionsGraph() {
                 id={pathId}
                 d={`M ${from.x} ${from.y} L ${to.x} ${to.y}`}
                 fill="none"
-                stroke="#8ea1ff"
+                stroke="#0f172a"
                 strokeWidth="0.6"
-                strokeOpacity="0.5"
-                strokeDasharray="2.2 1.6"
+                strokeOpacity="0.46"
+                strokeLinecap="round"
                 className={`animate-zubu-network-path ${connection.delayClass}`}
               />
             </g>
@@ -325,10 +325,10 @@ export function HeroConnectionsGraph() {
               key={particle.id}
               cx={position.x}
               cy={position.y}
-              r="1"
+              r="1.35"
               fill={isDark ? "#0f172a" : "#ffffff"}
               stroke={isDark ? "#ffffff" : "#0f172a"}
-              strokeWidth="0.18"
+              strokeWidth="0.4"
             />
           )
         })}

@@ -71,11 +71,19 @@ export function CTA() {
               {activeChannel === "mail" && (
                 <div className="space-y-3">
                   <p className="text-sm text-muted-foreground">Elegí desde dónde querés enviar el correo.</p>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap justify-center gap-2">
                     <button type="button" className={`mail-chip ${mailProvider === "gmail" ? "mail-chip--active" : ""}`} onClick={() => setMailProvider("gmail")}>Gmail</button>
                     <button type="button" className={`mail-chip ${mailProvider === "outlook" ? "mail-chip--active" : ""}`} onClick={() => setMailProvider("outlook")}>Outlook</button>
                   </div>
-                  <Button asChild size="lg" className="btn-energized h-12 w-full bg-black text-white hover:bg-black/85">
+                  <Button
+                    asChild
+                    size="lg"
+                    className={`btn-energized h-12 w-full text-white ${
+                      mailProvider === "gmail"
+                        ? "bg-[#EA4335] hover:bg-[#d7392e]"
+                        : "bg-[#0078D4] hover:bg-[#0069bc]"
+                    }`}
+                  >
                     <a href={emailHref} target="_blank" rel="noopener noreferrer">
                       Abrir {mailProvider === "gmail" ? "Gmail" : "Outlook"}
                       <ExternalLink className="ml-2 h-4 w-4" />
@@ -97,8 +105,8 @@ export function CTA() {
               )}
             </div>
 
-            <div className="mt-8">
-              <Button asChild size="lg" className="btn-energized h-14 w-full px-10 text-base sm:w-auto">
+            <div className="cta-final-wrap mt-8 inline-flex rounded-2xl p-2">
+              <Button asChild size="lg" className="cta-final-button btn-energized h-14 w-full px-10 text-base sm:w-auto">
                 <a href="#servicios">
                   Quiero automatizar mi negocio
                   <ArrowRight className="ml-2 h-5 w-5" />

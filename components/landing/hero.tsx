@@ -60,19 +60,19 @@ export function Hero() {
           </div>
 
           <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-3">
-            <div className="hover-lift-card animate-hero-float rounded-2xl border border-gray-200 bg-white p-4 text-left shadow-sm">
+            <div className="hover-lift-card animate-hero-float-card rounded-2xl border border-gray-200 bg-white p-4 text-left shadow-sm">
               <div className="motion-icon mb-2 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-gray-100">
                 <Zap className="h-5 w-5 text-black" />
               </div>
               <p className="text-sm font-semibold text-black">Automatización</p>
             </div>
-            <div className="hover-lift-card animate-hero-float-delayed rounded-2xl border border-gray-200 bg-white p-4 text-left shadow-sm">
+            <div className="hover-lift-card animate-hero-float-card-delayed rounded-2xl border border-gray-200 bg-white p-4 text-left shadow-sm">
               <div className="motion-icon motion-icon-delay-1 mb-2 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-gray-100">
                 <BarChart3 className="h-5 w-5 text-black" />
               </div>
               <p className="text-sm font-semibold text-black">Software a medida</p>
             </div>
-            <div className="hover-lift-card animate-hero-float rounded-2xl border border-gray-200 bg-white p-4 text-left shadow-sm [animation-delay:0.9s]">
+            <div className="hover-lift-card animate-hero-float-card rounded-2xl border border-gray-200 bg-white p-4 text-left shadow-sm [animation-delay:0.9s]">
               <div className="motion-icon motion-icon-delay-2 mb-2 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-gray-100">
                 <Bot className="h-5 w-5 text-black" />
               </div>

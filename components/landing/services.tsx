@@ -83,26 +83,35 @@ export function Services() {
           </p>
         </div>
 
-        <div className="mx-auto mt-16 grid max-w-6xl gap-6 sm:grid-cols-2 xl:grid-cols-3">
+        <div className="mx-auto mt-12 grid max-w-6xl gap-4 sm:mt-14">
           {services.map((service) => (
             <div
               key={service.title}
-              className="group hover-lift-card rounded-2xl border border-border/60 bg-card p-6 transition-all hover:border-border hover:shadow-md"
+              className="group hover-lift-card rounded-2xl border border-border/60 bg-card p-4 transition-all hover:border-border hover:shadow-md sm:p-5"
             >
-              <div className="motion-icon mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-muted transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-                <service.icon className="h-6 w-6" />
+              <div className="grid gap-4 md:grid-cols-[auto_1fr] md:items-start md:gap-5">
+                <div className="motion-icon flex h-11 w-11 items-center justify-center rounded-xl bg-muted transition-colors group-hover:bg-primary group-hover:text-primary-foreground sm:h-12 sm:w-12">
+                  <service.icon className="h-5 w-5 sm:h-6 sm:w-6" />
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-foreground">{service.title}</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                    {service.description}
+                  </p>
+
+                  <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+                    {service.points.map((point) => (
+                      <li
+                        key={point}
+                        className="rounded-lg border border-border/60 bg-muted/40 px-2.5 py-1.5 text-xs text-foreground/90 sm:text-sm"
+                      >
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-              <h3 className="font-semibold text-foreground">{service.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                {service.description}
-              </p>
-              <ul className="mt-4 space-y-1.5">
-                {service.points.map((point) => (
-                  <li key={point} className="text-sm text-foreground/85">
-                    • {point}
-                  </li>
-                ))}
-              </ul>
             </div>
           ))}
         </div>
