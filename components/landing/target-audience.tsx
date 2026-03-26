@@ -42,7 +42,7 @@ const audiences = [
 
 export function TargetAudience() {
   return (
-    <section id="para-quien" className="bg-muted/30 py-20 sm:py-28">
+    <section id="para-quien" className="section-interactive bg-muted/30 py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
@@ -57,9 +57,9 @@ export function TargetAudience() {
           {audiences.map((audience) => (
             <div
               key={audience.title}
-              className="flex items-start gap-4"
+              className="hover-lift-soft flex items-start gap-4 rounded-2xl border border-border/60 bg-card/75 p-4"
             >
-              <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-card border border-border/60">
+              <div className="motion-icon flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-card border border-border/60">
                 <audience.icon className="h-6 w-6 text-foreground" />
               </div>
               <div>

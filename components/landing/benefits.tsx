@@ -48,7 +48,7 @@ const benefits = [
 
 export function Benefits() {
   return (
-    <section className="bg-muted/30 py-20 sm:py-28">
+    <section className="section-interactive bg-muted/30 py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
@@ -63,9 +63,9 @@ export function Benefits() {
           {benefits.slice(0, 4).map((benefit) => (
             <div
               key={benefit.title}
-              className="rounded-2xl border border-border/60 bg-card p-6"
+              className="hover-lift-card rounded-2xl border border-border/60 bg-card p-6"
             >
-              <benefit.icon className="h-8 w-8 text-foreground" />
+              <benefit.icon className="motion-icon h-8 w-8 text-foreground" />
               <h3 className="mt-4 font-semibold text-foreground">{benefit.title}</h3>
               <p className="mt-2 text-sm text-muted-foreground">{benefit.description}</p>
             </div>
@@ -76,9 +76,9 @@ export function Benefits() {
           {benefits.slice(4).map((benefit) => (
             <div
               key={benefit.title}
-              className="rounded-2xl border border-border/60 bg-card p-6"
+              className="hover-lift-card rounded-2xl border border-border/60 bg-card p-6"
             >
-              <benefit.icon className="h-8 w-8 text-foreground" />
+              <benefit.icon className="motion-icon motion-icon-delay-1 h-8 w-8 text-foreground" />
               <h3 className="mt-4 font-semibold text-foreground">{benefit.title}</h3>
               <p className="mt-2 text-sm text-muted-foreground">{benefit.description}</p>
             </div>

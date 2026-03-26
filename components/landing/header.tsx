@@ -13,7 +13,6 @@ const navLinks = [
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [contactModalOpen, setContactModalOpen] = useState(false)
 
   return (
     <>
@@ -38,12 +37,8 @@ export function Header() {
           </nav>
 
           <div className="hidden items-center md:flex md:justify-self-end">
-            <Button
-              size="sm"
-              className="bg-black text-white hover:bg-black/85"
-              onClick={() => setContactModalOpen(true)}
-            >
-              Contactanos
+            <Button asChild size="sm" className="btn-energized bg-black text-white hover:bg-black/85">
+              <a href="#contacto">Contactanos</a>
             </Button>
           </div>
 
@@ -72,66 +67,16 @@ export function Header() {
                 </a>
               ))}
               <div className="mt-4 space-y-2">
-                <Button
-                  className="w-full bg-black text-white hover:bg-black/85"
-                  onClick={() => {
-                    setMobileMenuOpen(false)
-                    setContactModalOpen(true)
-                  }}
-                >
-                  Contactanos
+                <Button asChild className="btn-energized w-full bg-black text-white hover:bg-black/85">
+                  <a href="#contacto" onClick={() => setMobileMenuOpen(false)}>
+                    Contactanos
+                  </a>
                 </Button>
               </div>
             </nav>
           </div>
         )}
       </header>
-
-      {contactModalOpen && (
-        <div
-          className="fixed inset-0 z-[70] flex items-center justify-center bg-black/60 px-4"
-          onClick={() => setContactModalOpen(false)}
-        >
-          <div
-            className="w-full max-w-xs rounded-2xl bg-white p-5 text-black shadow-2xl"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <div className="mb-4 flex items-center justify-between">
-              <h3 className="text-base font-semibold">Contactanos</h3>
-              <button
-                className="rounded-md p-1 text-black/70 transition-colors hover:bg-black/10 hover:text-black"
-                onClick={() => setContactModalOpen(false)}
-                aria-label="Cerrar"
-              >
-                <X className="h-4 w-4" />
-              </button>
-            </div>
-
-            <div className="space-y-2">
-              <Button asChild className="w-full bg-[#25D366] text-white hover:bg-[#1ebe5b]">
-                <a
-                  href="https://wa.me/5493764502803?text=Hola%20ZUBU,%20quiero%20automatizar%20mi%20negocio"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setContactModalOpen(false)}
-                >
-                  WhatsApp
-                </a>
-              </Button>
-              <Button asChild variant="outline" className="w-full border-black/20 text-black hover:bg-black/5">
-                <a
-                  href="https://mail.google.com/mail/?view=cm&fs=1&to=contacto@zubu.agency&su=Consulta%20desde%20la%20web"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setContactModalOpen(false)}
-                >
-                  Mail
-                </a>
-              </Button>
-            </div>
-          </div>
-        </div>
-      )}
     </>
   )
 }

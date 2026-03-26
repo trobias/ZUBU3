@@ -37,7 +37,7 @@ const teamMembers = [
 
 export function About() {
   return (
-    <section id="nosotros" className="bg-muted/30 py-20 sm:py-28">
+    <section id="nosotros" className="section-interactive bg-muted/30 py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
@@ -50,10 +50,10 @@ export function About() {
             <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
               Creamos soluciones para atención, ventas, operaciones, cobros, datos y control interno, con una visión práctica: menos tareas manuales, más orden y mejores resultados.
             </p>
-            <ul className="mt-8 grid grid-cols-2 gap-4">
+            <ul className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
               {highlights.map((item) => (
                 <li key={item} className="flex items-center gap-3">
-                  <CheckCircle2 className="h-5 w-5 flex-shrink-0 text-foreground" />
+                  <CheckCircle2 className="motion-icon h-5 w-5 flex-shrink-0 text-foreground" />
                   <span className="text-sm font-medium text-foreground">{item}</span>
                 </li>
               ))}
@@ -64,22 +64,22 @@ export function About() {
               <div className="absolute -inset-4 rounded-3xl bg-gradient-to-tr from-border/50 to-transparent" />
               <div className="relative grid grid-cols-2 gap-4">
                 <div className="space-y-4">
-                  <div className="rounded-2xl border border-border/60 bg-card p-6 shadow-sm">
-                    <div className="text-3xl font-bold text-foreground">+10</div>
+                  <div className="hover-lift-card rounded-2xl border border-border/60 bg-card p-5 shadow-sm sm:p-6">
+                    <div className="text-2xl font-bold text-foreground sm:text-3xl">+10</div>
                     <div className="mt-1 text-sm text-muted-foreground">Proyectos entregados</div>
                   </div>
-                  <div className="rounded-2xl border border-border/60 bg-card p-6 shadow-sm">
-                    <div className="text-3xl font-bold text-foreground">100%</div>
+                  <div className="hover-lift-card rounded-2xl border border-border/60 bg-card p-5 shadow-sm sm:p-6">
+                    <div className="text-2xl font-bold text-foreground sm:text-3xl">100%</div>
                     <div className="mt-1 text-sm text-muted-foreground">Clientes satisfechos</div>
                   </div>
                 </div>
                 <div className="mt-8 space-y-4">
-                  <div className="rounded-2xl border border-border/60 bg-card p-6 shadow-sm">
-                    <div className="text-3xl font-bold text-foreground">24/7</div>
+                  <div className="hover-lift-card rounded-2xl border border-border/60 bg-card p-5 shadow-sm sm:p-6">
+                    <div className="text-2xl font-bold text-foreground sm:text-3xl">24/7</div>
                     <div className="mt-1 text-sm text-muted-foreground">Sistemas funcionando</div>
                   </div>
-                  <div className="rounded-2xl border border-border/60 bg-card p-6 shadow-sm">
-                    <div className="text-3xl font-bold text-foreground">-70%</div>
+                  <div className="hover-lift-card rounded-2xl border border-border/60 bg-card p-5 shadow-sm sm:p-6">
+                    <div className="text-2xl font-bold text-foreground sm:text-3xl">-70%</div>
                     <div className="mt-1 text-sm text-muted-foreground">Tiempo en tareas manuales</div>
                   </div>
                 </div>
@@ -92,14 +92,14 @@ export function About() {
           <h3 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">Nuestro equipo</h3>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             {teamMembers.map((member) => (
-              <article key={member.name} className="flex h-full flex-col rounded-2xl border border-border/60 bg-card px-6 pt-6 pb-6 shadow-sm">
+              <article key={member.name} className="group hover-lift-card flex h-full flex-col rounded-2xl border border-border/60 bg-card px-6 pt-6 pb-6 shadow-sm">
                 <div className="flex items-center gap-4">
                   <Image
                     src={member.photo}
                     alt={member.name}
                     width={64}
                     height={64}
-                    className="h-16 w-16 rounded-xl object-cover"
+                    className="h-16 w-16 rounded-xl object-cover transition-transform duration-300 group-hover:scale-110"
                   />
                   <div>
                     <h4 className="text-base font-semibold text-foreground">{member.name}</h4>

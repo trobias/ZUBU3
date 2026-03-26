@@ -54,7 +54,7 @@ const services = [
 
 export function Services() {
   return (
-    <section id="servicios" className="bg-background pt-16 pb-20 sm:pt-24 sm:pb-28">
+    <section id="servicios" className="section-interactive bg-background pt-16 pb-20 sm:pt-24 sm:pb-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
@@ -69,9 +69,9 @@ export function Services() {
           {services.map((service) => (
             <div
               key={service.title}
-              className="group rounded-2xl border border-border/60 bg-card p-6 transition-all hover:border-border hover:shadow-md"
+              className="group hover-lift-card rounded-2xl border border-border/60 bg-card p-6 transition-all hover:border-border hover:shadow-md"
             >
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-muted transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+              <div className="motion-icon mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-muted transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                 <service.icon className="h-6 w-6" />
               </div>
               <h3 className="font-semibold text-foreground">{service.title}</h3>

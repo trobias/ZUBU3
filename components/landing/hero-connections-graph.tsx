@@ -70,13 +70,13 @@ const nodes = [
 ]
 
 const connections = [
-  { from: "input", to: "validation" },
-  { from: "input", to: "routing" },
-  { from: "validation", to: "routing" },
-  { from: "routing", to: "storage" },
-  { from: "routing", to: "trigger" },
-  { from: "storage", to: "output" },
-  { from: "trigger", to: "output" },
+  { from: "input", to: "validation", delayClass: "[animation-delay:0s]" },
+  { from: "input", to: "routing", delayClass: "[animation-delay:0.16s]" },
+  { from: "validation", to: "routing", delayClass: "[animation-delay:0.32s]" },
+  { from: "routing", to: "storage", delayClass: "[animation-delay:0.48s]" },
+  { from: "routing", to: "trigger", delayClass: "[animation-delay:0.64s]" },
+  { from: "storage", to: "output", delayClass: "[animation-delay:0.8s]" },
+  { from: "trigger", to: "output", delayClass: "[animation-delay:0.96s]" },
 ]
 
 const routeDefinitions = {
@@ -178,13 +178,14 @@ export function HeroConnectionsGraph() {
 
   const nextParticleId = useRef(3)
   const lastFrameTime = useRef<number | null>(null)
+  const accumulatedDelta = useRef(0)
 
   const [particles, setParticles] = useState<Particle[]>([
     {
       id: 1,
       routeId: "upper",
       distance: 0,
-      speed: 18,
+      speed: 24,
       spawnedAtRouting: false,
       invertColor: false,
     },
@@ -192,7 +193,7 @@ export function HeroConnectionsGraph() {
       id: 2,
       routeId: "lower",
       distance: 0,
-      speed: 18,
+      speed: 25,
       spawnedAtRouting: false,
       invertColor: true,
     },
@@ -200,14 +201,37 @@ export function HeroConnectionsGraph() {
 
   useEffect(() => {
     let animationFrameId = 0
+    const frameInterval = 1 / 50
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+    if (reduceMotion) {
+      return () => {
+        cancelAnimationFrame(animationFrameId)
+      }
+    }
 
     const tick = (timestamp: number) => {
       if (lastFrameTime.current === null) {
         lastFrameTime.current = timestamp
       }
 
+      if (document.visibilityState === "hidden") {
+        lastFrameTime.current = timestamp
+        animationFrameId = requestAnimationFrame(tick)
+        return
+      }
+
       const deltaSeconds = Math.min((timestamp - lastFrameTime.current) / 1000, 0.06)
       lastFrameTime.current = timestamp
+      accumulatedDelta.current += deltaSeconds
+
+      if (accumulatedDelta.current < frameInterval) {
+        animationFrameId = requestAnimationFrame(tick)
+        return
+      }
+
+      const simulationDelta = accumulatedDelta.current
+      accumulatedDelta.current = 0
 
       setParticles((previousParticles) => {
         const updatedParticles: Particle[] = []
@@ -216,7 +240,7 @@ export function HeroConnectionsGraph() {
         for (const particle of previousParticles) {
           const route = routeGeometries[particle.routeId]
           const previousDistance = particle.distance
-          let nextDistance = particle.distance + particle.speed * deltaSeconds
+          let nextDistance = particle.distance + particle.speed * simulationDelta
           let spawnedAtRouting = particle.spawnedAtRouting
 
           if (nextDistance >= route.totalLength) {
@@ -230,7 +254,7 @@ export function HeroConnectionsGraph() {
             previousDistance < route.routingDistance &&
             nextDistance >= route.routingDistance
 
-          if (crossesRoutingNode && previousParticles.length + newParticles.length < 8) {
+          if (crossesRoutingNode && previousParticles.length + newParticles.length < 6) {
             const alternateRouteId: RouteId = particle.routeId === "upper" ? "lower" : "upper"
             const alternateRoute = routeGeometries[alternateRouteId]
 
@@ -238,7 +262,7 @@ export function HeroConnectionsGraph() {
               id: nextParticleId.current,
               routeId: alternateRouteId,
               distance: alternateRoute.routingDistance,
-              speed: particle.speed,
+              speed: Math.max(20, particle.speed - 1),
               spawnedAtRouting: true,
               invertColor: !particle.invertColor,
             })
@@ -266,20 +290,10 @@ export function HeroConnectionsGraph() {
   }, [routeGeometries])
 
   return (
-    <div className="relative mx-auto aspect-[4/3] w-full max-w-[560px] min-h-[320px] rounded-[2.7rem] bg-[#f5f7fb] p-4">
-      <div className="absolute inset-8 rounded-[2rem] border border-slate-100 opacity-70" />
+    <div className="relative mx-auto aspect-[4/3] w-full max-w-[560px] min-h-[280px] rounded-[2rem] bg-[#f5f7fb] p-2 sm:min-h-[320px] sm:rounded-[2.7rem] sm:p-4">
+      <div className="absolute inset-5 rounded-[1.5rem] border border-slate-100 opacity-70 sm:inset-8 sm:rounded-[2rem]" />
 
       <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-        <defs>
-          <filter id="zubu-signal-glow">
-            <feGaussianBlur stdDeviation="0.8" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-        </defs>
-
         {connections.map((connection, index) => {
           const from = getNodePosition(connection.from)
           const to = getNodePosition(connection.to)
@@ -294,6 +308,8 @@ export function HeroConnectionsGraph() {
                 stroke="#8ea1ff"
                 strokeWidth="0.6"
                 strokeOpacity="0.5"
+                strokeDasharray="2.2 1.6"
+                className={`animate-zubu-network-path ${connection.delayClass}`}
               />
             </g>
           )
@@ -313,7 +329,6 @@ export function HeroConnectionsGraph() {
               fill={isDark ? "#0f172a" : "#ffffff"}
               stroke={isDark ? "#ffffff" : "#0f172a"}
               strokeWidth="0.18"
-              filter="url(#zubu-signal-glow)"
             />
           )
         })}
@@ -328,14 +343,14 @@ export function HeroConnectionsGraph() {
             className={`absolute -translate-x-1/2 -translate-y-1/2 ${node.positionClass} ${node.delayClass} ${node.endpoint ? "animate-hero-float" : "animate-hero-float-delayed"}`}
           >
             <div
-              className={`relative rounded-2xl border border-white/60 bg-white/65 px-2.5 py-2 text-center shadow-[0_8px_24px_rgba(148,163,184,0.24)] backdrop-blur-md sm:px-3 sm:py-2.5 ${
-                node.endpoint ? "min-w-[82px] sm:min-w-[98px]" : "min-w-[72px] sm:min-w-[88px]"
+              className={`relative rounded-2xl border border-white/60 bg-white/65 px-2 py-1.5 text-center shadow-[0_8px_24px_rgba(148,163,184,0.24)] backdrop-blur-md sm:px-3 sm:py-2.5 ${
+                node.endpoint ? "min-w-[64px] sm:min-w-[98px]" : "min-w-[58px] sm:min-w-[88px]"
               }`}
             >
-              <div className="mx-auto mb-1.5 flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-slate-100 to-white sm:h-9 sm:w-9">
-                <Icon className="h-4 w-4 text-slate-800" />
+              <div className="mx-auto mb-1 flex h-6 w-6 items-center justify-center rounded-lg bg-gradient-to-br from-slate-100 to-white sm:mb-1.5 sm:h-9 sm:w-9 sm:rounded-xl">
+                <Icon className="h-3.5 w-3.5 text-slate-800 sm:h-4 sm:w-4" />
               </div>
-              <span className="block text-[10px] font-semibold text-slate-700 sm:text-xs">{node.label}</span>
+              <span className="block text-[9px] font-semibold text-slate-700 sm:text-xs">{node.label}</span>
               {node.endpoint && (
                 <span className="absolute -right-1 -top-1 flex h-2.5 w-2.5 rounded-full bg-[#74bdf2]">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#74bdf2]/75" />
@@ -346,7 +361,7 @@ export function HeroConnectionsGraph() {
         )
       })}
 
-      <div className="absolute bottom-3 left-4 right-4 flex justify-between text-[9px] font-medium uppercase tracking-wide text-slate-500/80 sm:text-[10px]">
+      <div className="absolute bottom-2 left-3 right-3 flex justify-between text-[8px] font-medium uppercase tracking-wide text-slate-500/80 sm:bottom-3 sm:left-4 sm:right-4 sm:text-[10px]">
         <span>Flujo: ZUBU_001</span>
         <span>Activo</span>
       </div>

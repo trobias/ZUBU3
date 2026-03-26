@@ -33,7 +33,7 @@ const testimonials = [
 
 export function Testimonials() {
   return (
-    <section id="testimonios" className="bg-background py-20 sm:py-28">
+    <section id="testimonios" className="section-interactive bg-background py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
@@ -44,24 +44,24 @@ export function Testimonials() {
           </p>
         </div>
 
-        <div className="mx-auto mt-16 grid max-w-6xl gap-8 sm:grid-cols-2">
+        <div className="mx-auto mt-12 grid max-w-6xl gap-6 sm:mt-16 sm:gap-8 sm:grid-cols-2">
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.author}
-              className="relative rounded-2xl border border-border/60 bg-card p-8"
+              className="hover-lift-card relative rounded-2xl border border-border/60 bg-card p-6 sm:p-8"
             >
-              <Quote className="absolute right-6 top-6 h-8 w-8 text-muted/30" />
-              <p className="text-lg leading-relaxed text-foreground">
+              <Quote className="motion-icon absolute right-6 top-6 h-8 w-8 text-muted/30" />
+              <p className="text-base leading-relaxed text-foreground sm:text-lg">
                 &ldquo;{testimonial.quote}&rdquo;
               </p>
-              <div className="mt-6 flex items-center justify-between">
+              <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <div className="font-semibold text-foreground">{testimonial.author}</div>
                   <div className="text-sm text-muted-foreground">
                     {testimonial.role}, {testimonial.company}
                   </div>
                 </div>
-                <div className="rounded-lg bg-muted px-3 py-1.5 text-sm font-medium text-foreground">
+                <div className="hover-lift-soft rounded-lg bg-muted px-3 py-1.5 text-xs font-medium text-foreground sm:text-sm">
                   {testimonial.metric}
                 </div>
               </div>
