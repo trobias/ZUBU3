@@ -10,7 +10,7 @@ import {
 const nodes = [
   {
     id: "input",
-    label: "Input",
+    label: "Entrada",
     icon: MessageSquare,
     x: 8,
     y: 52,
@@ -29,7 +29,7 @@ const nodes = [
   },
   {
     id: "routing",
-    label: "Routing",
+    label: "Enrutamiento",
     icon: Zap,
     x: 50,
     y: 52,
@@ -38,7 +38,7 @@ const nodes = [
   },
   {
     id: "storage",
-    label: "Storage",
+    label: "Almacenamiento",
     icon: Database,
     x: 72,
     y: 22,
@@ -47,7 +47,7 @@ const nodes = [
   },
   {
     id: "trigger",
-    label: "Trigger",
+    label: "Disparo",
     icon: FileCheck,
     x: 72,
     y: 82,
@@ -56,7 +56,7 @@ const nodes = [
   },
   {
     id: "output",
-    label: "Output",
+    label: "Salida",
     icon: Send,
     x: 92,
     y: 52,
@@ -162,8 +162,8 @@ export function HeroConnectionsGraph() {
       })}
 
       <div className="absolute bottom-3 left-4 right-4 flex justify-between text-[9px] font-medium uppercase tracking-wide text-slate-500/80 sm:text-[10px]">
-        <span>Flow: ZUBU_001</span>
-        <span>Active</span>
+        <span>Flujo: ZUBU_001</span>
+        <span>Activo</span>
       </div>
     </div>
   )
