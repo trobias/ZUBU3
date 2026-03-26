@@ -218,6 +218,47 @@
   }
 }
 
+@keyframes zubu-title-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(18px);
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes zubu-zu-glow {
+  0%,
+  100% {
+    text-shadow: 0 8px 18px rgba(84, 184, 255, 0.2), 0 2px 0 rgba(11, 19, 36, 0.08);
+  }
+  50% {
+    text-shadow: 0 10px 30px rgba(84, 184, 255, 0.34), 0 2px 0 rgba(11, 19, 36, 0.08);
+  }
+}
+
+@keyframes zubu-bu-stroke {
+  0%,
+  100% {
+    -webkit-text-stroke-color: rgba(108, 126, 255, 0.78);
+    text-shadow: 0 0 0 rgba(243, 181, 138, 0);
+    transform: translateY(0);
+  }
+  45% {
+    -webkit-text-stroke-color: rgba(108, 126, 255, 1);
+    text-shadow: 0 0 22px rgba(243, 181, 138, 0.32);
+  }
+  70% {
+    -webkit-text-stroke-color: rgba(243, 181, 138, 0.95);
+    text-shadow: 0 0 16px rgba(108, 126, 255, 0.34);
+    transform: translateY(-1px);
+  }
+}
+
 @layer utilities {
   .animate-hero-float {
     animation: hero-float 6.4s ease-in-out infinite;
@@ -256,4 +297,35 @@
     transform-origin: center;
     animation: zubu-signal-soft 1.8s ease-in-out infinite;
   }
+}
+
+.hero-title-enter {
+  display: inline-block;
+  opacity: 0;
+  animation: zubu-title-enter 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.hero-title-zu {
+  color: #0b1324;
+  text-shadow: 0 8px 20px rgba(84, 184, 255, 0.2), 0 2px 0 rgba(11, 19, 36, 0.08);
+  animation-delay: 0.08s;
+  animation-name: zubu-title-enter, zubu-zu-glow;
+  animation-duration: 0.85s, 4.8s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1), ease-in-out;
+  animation-fill-mode: forwards, both;
+  animation-iteration-count: 1, infinite;
+}
+
+.hero-title-bu {
+  position: relative;
+  color: transparent;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: rgba(108, 126, 255, 0.9);
+  letter-spacing: 0.02em;
+  animation-delay: 0.26s;
+  animation-name: zubu-title-enter, zubu-bu-stroke;
+  animation-duration: 0.85s, 5.6s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1), ease-in-out;
+  animation-fill-mode: forwards, both;
+  animation-iteration-count: 1, infinite;
 }
